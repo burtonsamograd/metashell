@@ -46,7 +46,7 @@ void help() {
   cerr << "Welcome to msh (metashell)." << endl;
   cerr << "" << endl;
   cerr << "Type words to enter them into the line buffer." << endl;
-  cerr << "Type 'go' to execute the line buffer in your shell." << endl;
+  cerr << "Type 'go' to execute the line buffer in /bin/sh." << endl;
   cerr << "Type 'clear' to clear the line buffer" << endl;
   cerr << "Type 'define <word> <args...> as <definition...> .' to define new words." << endl;
   cerr << "Type 'lookup <word> to get a word's definition." << endl;
