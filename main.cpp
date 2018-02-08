@@ -70,14 +70,16 @@ string expand(istream& in, string& word, Dictionary& dictionary) {
   Definition& d = dictionary[word];
 
   for(auto arg : d.args) {
-    cout << arg << " > ";
-    cout.flush();
+    if(!in.peek()) {
+      cout << arg << " > ";
+      cout.flush();
+    }
     in >> params[arg];
   }
   
   for(auto word : d.words) {
     if(params.count(word)) {
-      expansion += params[word] += "  ";
+      expansion += expand(in, params[word], dictionary) += "  ";
     } else {
       if(dictionary.count(word)) {
 	expansion += dictionary[word].definition + " ";
@@ -102,7 +104,9 @@ void process(istream& in, Dictionary& dictionary, bool noDribble = false, bool p
   do {
     string word;
     
-    promptFlag && prompt && cerr << "[ " << command << " ]" << endl << "$ ";
+    promptFlag && prompt &&
+      cerr << endl << "--------------------------------------------------------------------------------" << endl &&
+      cerr << "[ " << command << " ]" << endl << "$ ";
     promptFlag = false;
     
     // Read
