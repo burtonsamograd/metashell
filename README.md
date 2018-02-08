@@ -10,6 +10,7 @@ EXAMPLE:
 bash-3.2$ make
 g++ -g --std=c++11 -c main.cpp
 g++ -g --std=c++11 -o msh main.o
+
 bash-3.2$ ./msh
 
 Welcome to msh (metashell).
@@ -22,12 +23,14 @@ Type 'lookup <word> to get a word's definition.
 Type 'words' to see all defined words.
 
 [  ]
-$ define list as ls go
-> [  ]
+$ define list as ls
+> go
+[  ]
 $ define list2 x as list x go
 > > [  ]
-$ list .
-go
+$ list2 .
+[ ls  .   ]
+$ go
 Makefile
 README.md
 main.cpp
@@ -36,15 +39,7 @@ msh
 old
 rd
 [  ]
-$ list2 . go
-Makefile
-README.md
-main.cpp
-main.o
-msh
-old
-rd
-[  ]
+$ 
 ```
 
 --
