@@ -39,7 +39,13 @@ msh
 old
 rd
 [  ]
-$ 
+$ define list where as ls where go
+> > [  ]
+$ define status as git 'status' go
+[  ]
+$ status
+[ git 'status'  ]
+$ go
 ```
 
 --
