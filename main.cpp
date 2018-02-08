@@ -64,7 +64,7 @@ void define(string& word, Definition& d) {
 
 typedef map<string, Definition> Dictionary;
 
-string expand(string& word, Dictionary& dictionary) {
+string expand(istream& in, string& word, Dictionary& dictionary) {
   string expansion;
   map<string, string> params;
   Definition& d = dictionary[word];
@@ -72,7 +72,7 @@ string expand(string& word, Dictionary& dictionary) {
   for(auto arg : d.args) {
     cout << arg << " > ";
     cout.flush();
-    cin >> params[arg];
+    in >> params[arg];
   }
   
   for(auto word : d.words) {
@@ -213,7 +213,7 @@ void process(istream& in, Dictionary& dictionary, bool noDribble = false, bool p
     } else {
       // Expand
       if(dictionary.count(word)) {
-	command += expand(word, dictionary);
+	command += expand(in, word, dictionary);
       } else {
 	command += word + " ";
       }
