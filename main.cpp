@@ -70,6 +70,8 @@ string expand(string& word, Dictionary& dictionary) {
   Definition& d = dictionary[word];
 
   for(auto arg : d.args) {
+    cout << arg << " > ";
+    cout.flush();
     cin >> params[arg];
   }
   
