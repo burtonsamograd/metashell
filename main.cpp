@@ -71,6 +71,13 @@ string expand(istream& in, string& word, Dictionary& dictionary, bool isStdin) {
 
   for(auto arg : d.args) {
     in >> params[arg];
+    if (params[arg][0] == '"') { // Read quoted string
+      while(params[arg][params[arg].length()-1] != '"') {
+	string next;
+	in >> next;
+	params[arg] += " " + next;
+      }
+    }
   }
   
   for(auto word : d.words) {
