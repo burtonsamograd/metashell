@@ -15,7 +15,7 @@ bash-3.2$ ./msh
 Welcome to msh (metashell).
 
 Type words to enter them into the line buffer.
-Type 'go' to execute the line buffer in your shell.
+Type 'go' to execute the line buffer in /bin/sh.
 Type 'clear' to clear the line buffer
 Type 'define <word> <args...> as <definition...> .' to define new words.
 Type 'lookup <word> to get a word's definition.
