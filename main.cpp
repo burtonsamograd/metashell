@@ -64,22 +64,31 @@ void define(string& word, Definition& d) {
 
 typedef map<string, Definition> Dictionary;
 
-string expand(istream& in, string& word, Dictionary& dictionary) {
+string expand(istream& in, string& word, Dictionary& dictionary, bool isStdin) {
   string expansion;
   map<string, string> params;
   Definition& d = dictionary[word];
 
   for(auto arg : d.args) {
-    if(!in.peek()) {
-      cout << arg << " > ";
-      cout.flush();
+    //if(!(std::cin >> std::ws).peek()) {
+    cerr << arg << " > ";
+    cerr.flush();
+    //}
+    if(isStdin) {
+      string start;
+      in >> start;
+      getline(in, params[arg]);
+      params[arg] = start + " " + params[arg];
+    } else {
+      in >> params[arg];
     }
-    in >> params[arg];
   }
   
   for(auto word : d.words) {
     if(params.count(word)) {
-      expansion += expand(in, params[word], dictionary) += "  ";
+      expansion += params[word] += "  ";
+    } else if(dictionary.count(word)) {
+      expansion += expand(in, params[word], dictionary, isStdin) += "  ";
     } else {
       if(dictionary.count(word)) {
 	expansion += dictionary[word].definition + " ";
@@ -92,7 +101,7 @@ string expand(istream& in, string& word, Dictionary& dictionary) {
   return expansion; // d.definition + " ";
 }
 
-void process(istream& in, Dictionary& dictionary, bool noDribble = false, bool prompt = true, bool noExec = false) {
+void process(istream& in, Dictionary& dictionary, bool isStdin, bool noDribble = false, bool prompt = true, bool noExec = false) {
   ofstream dribble;
   string command;
   bool promptFlag = true;
@@ -217,7 +226,7 @@ void process(istream& in, Dictionary& dictionary, bool noDribble = false, bool p
     } else {
       // Expand
       if(dictionary.count(word)) {
-	command += expand(in, word, dictionary);
+	command += expand(in, word, dictionary, isStdin);
       } else {
 	command += word + " ";
       }
@@ -235,8 +244,8 @@ int main() {
 
   ifstream dribble(dribbleFile, ifstream::in);
 
-  process(dribble, dictionary, true, false, true);
-  process(cin, dictionary);
+  process(dribble, dictionary, false, true, false, true);
+  process(cin, dictionary, true);
   
   debug && cout << endl;
 }
