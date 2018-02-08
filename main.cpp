@@ -70,25 +70,14 @@ string expand(istream& in, string& word, Dictionary& dictionary, bool isStdin) {
   Definition& d = dictionary[word];
 
   for(auto arg : d.args) {
-    //if(!(std::cin >> std::ws).peek()) {
-    cerr << arg << " > ";
-    cerr.flush();
-    //}
-    if(isStdin) {
-      string start;
-      in >> start;
-      getline(in, params[arg]);
-      params[arg] = start + " " + params[arg];
-    } else {
-      in >> params[arg];
-    }
+    in >> params[arg];
   }
   
   for(auto word : d.words) {
     if(params.count(word)) {
-      expansion += params[word] += "  ";
+      expansion += params[word] += " ";
     } else if(dictionary.count(word)) {
-      expansion += expand(in, params[word], dictionary, isStdin) += "  ";
+      expansion += expand(in, params[word], dictionary, isStdin) += " ";
     } else {
       if(dictionary.count(word)) {
 	expansion += dictionary[word].definition + " ";
