@@ -97,7 +97,7 @@ string expand(istream& in, string& word, Dictionary& dictionary, bool isStdin) {
   return expansion; // d.definition + " ";
 }
 
-void process(istream& in, Dictionary& dictionary, bool isStdin, bool noDribble = false, bool prompt = true, bool noExec = false) {
+void process(istream& in, Dictionary& dictionary, bool isStdin, bool noDribble = true, bool prompt = true, bool noExec = false) {
   ofstream dribble;
   string command;
   bool promptFlag = true;
