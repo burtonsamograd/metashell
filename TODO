@@ -17,3 +17,15 @@ $ sh: line 0: .: filename argument required
 [  ]
 $ lookup ss
 define ss as ls where  .
+-- make definition output same as input required
+-- makes next task complete when redirected to a file
+   -- add word list saving feature
+
+-- add word list loading feature
+
+$ echo -- add clear to command to clear input buffer >> metashell/TODO go
+-- the above command doesn't work--------------------------------------------------------------------------------
+[ cd firefox*  ]
+$ sh: 1: cd: can't cd to firefox*
+-- exec rlwrap on starting metashell
+-- add quit and exit commands-- add save macro definitions == save to metashell
